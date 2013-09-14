@@ -1,0 +1,12 @@
+2013-09-13 14:58:03,031 | INFO | serverlogger | Info Message generated on server
+2013-09-13 14:58:49,631 | INFO | serverlogger | Info Message generated on server
+2013-09-14 11:56:55,865 | INFO | serverlogger | Info Message generated on server
+2013-09-14 11:57:32,525 | INFO | serverlogger | Info Message generated on server
+2013-09-14 11:58:42,760 | INFO | serverlogger | Info Message generated on server
+2013-09-14 12:10:03,206 | INFO | serverlogger | Info Message generated on server
+2013-09-14 12:11:19,253 | INFO | serverlogger | Info Message generated on server
+2013-09-14 12:11:19,372 | FATAL | jsLogger | log message
+2013-09-14 12:18:32,128 | INFO | serverlogger | Info Message generated on server
+2013-09-14 12:18:32,150 | FATAL | jsLogger | log message
+2013-09-14 12:19:03,393 | INFO | serverlogger | Info Message generated on server
+2013-09-14 12:19:03,415 | FATAL | jsLogger | log message
