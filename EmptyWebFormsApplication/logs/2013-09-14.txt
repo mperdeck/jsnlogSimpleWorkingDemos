@@ -1,8 +1,0 @@
-2013-09-14 11:59:11.0127  42 Warn                           serverlogger                   Warn Message generated on server 
-2013-09-14 22:54:15.5691   3 Warn                           serverlogger                   Warn Message generated on server 
-2013-09-14 22:54:30.4179  12 Warn                           serverlogger                   Warn Message generated on server 
-2013-09-14 22:54:36.4953   3 Warn                           serverlogger                   Warn Message generated on server 
-2013-09-14 22:58:06.3563   6 Warn                           serverlogger                   Warn Message generated on server 
-2013-09-14 22:58:06.4463  11 Fatal                          jsLogger                       log message 
-2013-09-14 22:58:13.7037  11 Warn                           serverlogger                   Warn Message generated on server 
-2013-09-14 22:58:13.7247  11 Fatal                          jsLogger                       log message 

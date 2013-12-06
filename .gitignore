@@ -78,8 +78,10 @@ publish
 # Publish Web Output
 *.Publish.xml
 
+# Do not ignore the package directory. People need to be able to download the zip of this project
+# and compile the solution without any further steps.
 # NuGet Packages Directory
-packages
+# packages
 
 # Windows Azure Build Output
 csx

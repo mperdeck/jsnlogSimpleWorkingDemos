@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Common.Logging.Elmah</id>
+    <version>1.2.1</version>
+    <title />
+    <authors>Wade</authors>
+    <owners>Wade</owners>
+    <projectUrl>http://www.dotblogs.com.tw/wadehuang36/archive/2011/10/06/Common-Logging-Elmah.aspx</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Common.Logging library bindings for Elmah logging framework.</description>
+    <releaseNotes>update to .net40</releaseNotes>
+    <tags>Common.Logging Elmah</tags>
+    <dependencies>
+      <dependency id="Common.Logging" version="2.1.0" />
+      <dependency id="elmah" version="1.2" />
+    </dependencies>
+    <references>
+      <reference file="Common.Logging.Elmah.dll" />
+    </references>
+  </metadata>
+</package>
