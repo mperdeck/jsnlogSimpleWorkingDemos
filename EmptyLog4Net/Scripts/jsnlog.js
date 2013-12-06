@@ -10,21 +10,17 @@ function JL(loggerName) {
         return JL.__;
     }
 
-    var ancestorName = '';
+    var accumulatedLoggerName = '';
     var logger = ('.' + loggerName).split('.').reduce(function (prev, curr, idx, arr) {
-        // if loggername is a.b, than ancestor will be set to the loggers
-        // root   (prev: JL, curr: '')
-        // a      (prev: JL.__, curr: 'a')
-        // a.b    (prev: JL.__.__a, curr: 'b')
-        var ancestor = prev['__' + curr];
-
-        if (ancestorName) {
-            ancestorName += '.' + curr;
+        if (accumulatedLoggerName) {
+            accumulatedLoggerName += '.' + curr;
         } else {
-            ancestorName = curr;
+            accumulatedLoggerName = curr;
         }
 
-        if (ancestor === undefined) {
+        var currentLogger = prev['__' + accumulatedLoggerName];
+
+        if (currentLogger === undefined) {
             // Set the prototype of the Logger constructor function to the parent of the logger
             // to be created. This way, __proto of the new logger object will point at the parent.
             // When logger.level is evaluated and is not present, the JavaScript runtime will
@@ -33,11 +29,11 @@ function JL(loggerName) {
             // Note that prev at this point refers to the parent logger.
             JL.Logger.prototype = prev;
 
-            ancestor = new JL.Logger(ancestorName);
-            prev['__' + curr] = ancestor;
+            currentLogger = new JL.Logger(accumulatedLoggerName);
+            prev['__' + accumulatedLoggerName] = currentLogger;
         }
 
-        return ancestor;
+        return currentLogger;
     }, JL.__);
 
     return logger;
@@ -100,6 +96,28 @@ var JL;
         try  {
             if (filters.ipRegex && JL.clientIP) {
                 if (!new RegExp(filters.ipRegex).test(JL.clientIP)) {
+                    return false;
+                }
+            }
+        } catch (e) {
+        }
+
+        return true;
+    }
+
+    /**
+    Returns true if a log should go ahead, based on the message.
+    
+    @param filters
+    Filters that determine whether a log can go ahead.
+    
+    @param message
+    Message to be logged.
+    */
+    function allowMessage(filters, message) {
+        try  {
+            if (filters.disallow) {
+                if (new RegExp(filters.disallow).test(message)) {
                     return false;
                 }
             }
@@ -197,6 +215,7 @@ var JL;
             copyProperty("level", options, this);
             copyProperty("ipRegex", options, this);
             copyProperty("userAgentRegex", options, this);
+            copyProperty("disallow", options, this);
             copyProperty("sendWithBufferLevel", options, this);
             copyProperty("storeInBufferLevel", options, this);
             copyProperty("bufferSize", options, this);
@@ -219,6 +238,9 @@ var JL;
             var logItem;
 
             if (!allow(this)) {
+                return;
+            }
+            if (!allowMessage(this, message)) {
                 return;
             }
 
@@ -310,51 +332,107 @@ var JL;
     var Logger = (function () {
         function Logger(loggerName) {
             this.loggerName = loggerName;
+            // Create seenRexes, otherwise this logger will use the seenRexes
+            // of its parent via the prototype chain.
+            this.seenRegexes = [];
         }
+        Logger.prototype.stringifyLogObject = function (logObject) {
+            switch (typeof logObject) {
+                case "string":
+                    return logObject;
+                case "number":
+                    return logObject.toString();
+                case "boolean":
+                    return logObject.toString();
+                case "undefined":
+                    return "undefined";
+                case "function":
+                    if (logObject instanceof RegExp) {
+                        return logObject.toString();
+                    } else {
+                        return this.stringifyLogObject(logObject());
+                    }
+                case "object":
+                    if ((logObject instanceof RegExp) || (logObject instanceof String) || (logObject instanceof Number) || (logObject instanceof Boolean)) {
+                        return logObject.toString();
+                    } else {
+                        return JSON.stringify(logObject);
+                    }
+                default:
+                    return "unknown";
+            }
+        };
+
         Logger.prototype.setOptions = function (options) {
             copyProperty("level", options, this);
             copyProperty("userAgentRegex", options, this);
+            copyProperty("disallow", options, this);
             copyProperty("ipRegex", options, this);
             copyProperty("appenders", options, this);
+            copyProperty("onceOnly", options, this);
+
+            // Reset seenRegexes, in case onceOnly has been changed.
+            this.seenRegexes = [];
 
             return this;
         };
 
-        Logger.prototype.log = function (level, message) {
+        Logger.prototype.log = function (level, logObject) {
             var i = 0;
+            var message;
 
             if (!this.appenders) {
-                return;
+                return this;
             }
 
             if (((level >= this.level)) && allow(this)) {
-                i = this.appenders.length - 1;
-                while (i >= 0) {
-                    this.appenders[i].log(level, message, this.loggerName);
-                    i--;
+                message = this.stringifyLogObject(logObject);
+
+                if (allowMessage(this, message)) {
+                    if (this.onceOnly) {
+                        i = this.onceOnly.length - 1;
+                        while (i >= 0) {
+                            if (new RegExp(this.onceOnly[i]).test(message)) {
+                                if (this.seenRegexes[i]) {
+                                    return this;
+                                }
+
+                                this.seenRegexes[i] = true;
+                            }
+
+                            i--;
+                        }
+                    }
+
+                    // Pass message to all appenders
+                    i = this.appenders.length - 1;
+                    while (i >= 0) {
+                        this.appenders[i].log(level, message, this.loggerName);
+                        i--;
+                    }
                 }
             }
 
             return this;
         };
 
-        Logger.prototype.trace = function (message) {
-            return this.log(getTraceLevel(), message);
+        Logger.prototype.trace = function (logObject) {
+            return this.log(getTraceLevel(), logObject);
         };
-        Logger.prototype.debug = function (message) {
-            return this.log(getDebugLevel(), message);
+        Logger.prototype.debug = function (logObject) {
+            return this.log(getDebugLevel(), logObject);
         };
-        Logger.prototype.info = function (message) {
-            return this.log(getInfoLevel(), message);
+        Logger.prototype.info = function (logObject) {
+            return this.log(getInfoLevel(), logObject);
         };
-        Logger.prototype.warn = function (message) {
-            return this.log(getWarnLevel(), message);
+        Logger.prototype.warn = function (logObject) {
+            return this.log(getWarnLevel(), logObject);
         };
-        Logger.prototype.error = function (message) {
-            return this.log(getErrorLevel(), message);
+        Logger.prototype.error = function (logObject) {
+            return this.log(getErrorLevel(), logObject);
         };
-        Logger.prototype.fatal = function (message) {
-            return this.log(getFatalLevel(), message);
+        Logger.prototype.fatal = function (logObject) {
+            return this.log(getFatalLevel(), logObject);
         };
         return Logger;
     })();

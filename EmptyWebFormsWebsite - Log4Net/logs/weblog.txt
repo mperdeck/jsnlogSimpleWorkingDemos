@@ -1,0 +1,2 @@
+2013-12-06 14:49:48,970 | INFO | serverlogger | Info Message generated on server
+2013-12-06 14:49:49,044 | FATAL | jsLogger | log message
