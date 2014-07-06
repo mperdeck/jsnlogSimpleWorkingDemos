@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyLog4Net", "EmptyLog4Net\EmptyLog4Net.csproj", "{7A0CB990-2691-4B43-8AE6-DB5649E62FE8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyNLog", "EmptyNLog\EmptyNLog.csproj", "{CDCB7529-1F4A-45BF-B644-D6CDCAF95F64}"
@@ -9,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyElmah", "EmptyElmah\Em
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyWebFormsApplication", "EmptyWebFormsApplication\EmptyWebFormsApplication.csproj", "{13AD9BA7-CD69-4BC3-B254-DF9A2AA3848D}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EmptyWebFormsWebsite - Log4Net", "EmptyWebFormsWebsite - Log4Net\", "{51E04542-ED35-4046-99DE-BB30979F2C25}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EmptyWebFormsWebsite - Log4Net(1)", "EmptyWebFormsWebsite - Log4Net\", "{51E04542-ED35-4046-99DE-BB30979F2C25}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		Debug.AspNetCompiler.VirtualPath = "/EmptyWebFormsWebsite - Log4Net"
@@ -27,9 +29,10 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EmptyWebFormsWebsite - Log4
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "60065"
+		SlnRelativePath = "EmptyWebFormsWebsite - Log4Net\"
 	EndProjectSection
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EmptyWebFormsWebsite", "EmptyWebFormsWebsite\", "{8D12B4C8-C605-4586-AA1E-C91B4F3E2384}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EmptyWebFormsWebsite(1)", "EmptyWebFormsWebsite\", "{8D12B4C8-C605-4586-AA1E-C91B4F3E2384}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		Debug.AspNetCompiler.VirtualPath = "/EmptyWebFormsWebsite"
@@ -47,7 +50,10 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EmptyWebFormsWebsite", "Emp
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "57144"
+		SlnRelativePath = "EmptyWebFormsWebsite\"
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptySerilog", "EmptySerilog\EmptySerilog.csproj", "{49E3F458-785F-4164-86F7-E35270571C93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +85,10 @@ Global
 		{8D12B4C8-C605-4586-AA1E-C91B4F3E2384}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D12B4C8-C605-4586-AA1E-C91B4F3E2384}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{8D12B4C8-C605-4586-AA1E-C91B4F3E2384}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{49E3F458-785F-4164-86F7-E35270571C93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49E3F458-785F-4164-86F7-E35270571C93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49E3F458-785F-4164-86F7-E35270571C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49E3F458-785F-4164-86F7-E35270571C93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
