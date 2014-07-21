@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EmptySerilog_MongoDb</title>
+   @Html.Raw(JSNLog.JavascriptLogging.Configure())
+</head>
+<body>
+    <h1>EmptySerilog_MongoDb</h1>
+    <p>
+        This sample assumes you have installed MongoDB on your localhost, as shown 
+        <a href="http://jsnlog.com/Documentation/GetStartedLogging/StructuredLogging">here</a>.
+    </p>
+
+    <script type="text/ecmascript">
+        var d = {a: 1, b: 2};
+        JL("jsLogger").fatal("log message from client");
+        JL("jsLogger").error({ msg: "message 1 from client", x: 5, y: 88, d: d });
+        JL("jsLogger").warn({ msg: "message 2 from client", x: 6, y2: 88, d: d });
+        JL("jsLogger").info({ msg: "message 3 from client", x: 7, y3: 88, d: d });
+        alert('serilog');
+    </script>
+        
+    <div>
+    </div>
+</body>
+</html>

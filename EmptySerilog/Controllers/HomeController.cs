@@ -14,11 +14,11 @@ namespace EmptySerilog.Controllers
 
         public ActionResult Index()
         {
-            Log.Logger.Information("Hello, Serilog2!");
+            Log.Logger.Information("Logging from controller");
 
-            var d1 = new { x = 5, y = 88 };
-            Log.Logger.Information("{d1}", d1);
-            Log.Logger.Information("{@d1}", d1);
+            //var d1 = new { x = 5, y = 88 };
+            //Log.Logger.Information("{d1}", d1);
+            //Log.Logger.Information("{@d1}", d1);
 
             return View();
         }

@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Serilog.Sinks.MongoDB</name>
+    </assembly>
+    <members>
+        <member name="T:Serilog.LoggerConfigurationMongoDBExtensions">
+            <summary>
+            Adds the WriteTo.MongoDB() extension method to <see cref="T:Serilog.LoggerConfiguration"/>.
+            </summary>
+        </member>
+        <member name="M:Serilog.LoggerConfigurationMongoDBExtensions.MongoDB(Serilog.Configuration.LoggerSinkConfiguration,System.String,Serilog.Events.LogEventLevel,System.Int32,System.Nullable{System.TimeSpan},System.IFormatProvider)">
+            <summary>
+            Adds a sink that writes log events as documents to a MongoDb database.
+            </summary>
+            <param name="loggerConfiguration">The logger configuration.</param>
+            <param name="databaseUrl">The URL of a created MongoDB collection that log events will be written to.</param>
+            <param name="restrictedToMinimumLevel">The minimum log event level required in order to write an event to the sink.</param>
+            <param name="batchPostingLimit">The maximum number of events to post in a single batch.</param>
+            <param name="period">The time to wait between checking for event batches.</param>
+            <param name="formatProvider">Supplies culture-specific formatting information, or null.</param>
+            <returns>Logger configuration, allowing configuration to continue.</returns>
+            <exception cref="T:System.ArgumentNullException">A required parameter is null.</exception>
+        </member>
+        <member name="M:Serilog.LoggerConfigurationMongoDBExtensions.MongoDBCapped(Serilog.Configuration.LoggerSinkConfiguration,System.String,Serilog.Events.LogEventLevel,System.Int64,System.Nullable{System.Int64},System.String,System.Int32,System.Nullable{System.TimeSpan},System.IFormatProvider)">
+            <summary>
+            Adds a sink that writes log events as documents to a MongoDb database.
+            </summary>
+            <param name="loggerConfiguration">The logger configuration.</param>
+            <param name="databaseUrl">The URL of a created MongoDB collection that log events will be written to.</param>
+            <param name="restrictedToMinimumLevel">The minimum log event level required in order to write an event to the sink.</param>
+            <param name="cappedMaxSizeMb">Max total size in megabytes of the created capped collection. (Default: 50mb)</param>
+            <param name="cappedMaxDocuments">Max number of documents of the created capped collection.</param>
+            <param name="collectionName">Name of the collection. Default is "log".</param>
+            <param name="batchPostingLimit">The maximum number of events to post in a single batch.</param>
+            <param name="period">The time to wait between checking for event batches.</param>
+            <param name="formatProvider">Supplies culture-specific formatting information, or null.</param>
+            <returns>Logger configuration, allowing configuration to continue.</returns>
+            <exception cref="T:System.ArgumentNullException">A required parameter is null.</exception>
+        </member>
+        <member name="T:Serilog.Sinks.MongoDB.MongoDBSink">
+            <summary>
+            Writes log events as documents to a CouchDB database.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MongoDB.MongoDBSink.DefaultBatchPostingLimit">
+            <summary>
+            A reasonable default for the number of events posted in
+            each batch.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MongoDB.MongoDBSink.DefaultPeriod">
+            <summary>
+            A reasonable default time to wait between checking for event batches.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MongoDB.MongoDBSink.DefaultCollectionName">
+            <summary>
+            The default name for the log collection.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MongoDB.MongoDBSink.#ctor(System.String,System.Int32,System.TimeSpan,System.IFormatProvider,System.String,MongoDB.Driver.IMongoCollectionOptions)">
+            <summary>
+            Construct a sink posting to the specified database.
+            </summary>
+            <param name="databaseUrl">The URL of a CouchDB database.</param>
+            <param name="batchPostingLimit">The maximum number of events to post in a single batch.</param>
+            <param name="period">The time to wait between checking for event batches.</param>
+            <param name="formatProvider">Supplies culture-specific formatting information, or null.</param>
+            <param name="collectionName">Name of the MongoDb collection to use for the log. Default is "log".</param>
+            <param name="collectionCreationOptions">Collection Creation Options for the log collection creation.</param>
+        </member>
+        <member name="M:Serilog.Sinks.MongoDB.MongoDBSink.VerifyCollection(MongoDB.Driver.MongoDatabase)">
+            <summary>
+            Verifies the the MongoDatabase collection exists or creates it if it doesn't.
+            </summary>
+            <param name="logDb"></param>
+        </member>
+        <member name="M:Serilog.Sinks.MongoDB.MongoDBSink.EmitBatch(System.Collections.Generic.IEnumerable{Serilog.Events.LogEvent})">
+            <summary>
+            Emit a batch of log events, running to completion synchronously.
+            </summary>
+            <param name="events">The events to emit.</param>
+            <remarks>Override either <see cref="M:Serilog.Sinks.PeriodicBatching.PeriodicBatchingSink.EmitBatch(System.Collections.Generic.IEnumerable{Serilog.Events.LogEvent})"/> or <see cref="M:Serilog.Sinks.PeriodicBatching.PeriodicBatchingSink.EmitBatchAsync(System.Collections.Generic.IEnumerable{Serilog.Events.LogEvent})"/>,
+            not both.</remarks>
+        </member>
+    </members>
+</doc>
