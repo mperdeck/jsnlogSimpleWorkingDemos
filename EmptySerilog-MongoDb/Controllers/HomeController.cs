@@ -16,11 +16,10 @@ namespace EmptySerilog_MongoDb.Controllers
         {
             Log.Logger.Information("Logging from controller2");
 
-            //######################
+            // Logging with Serilog from server side code
             var d0 = new { x = 5, y = 88 };
             var d1 = new { z = 9, d0 = d0 };
-            Log.Logger.Information("non at logging {d1}", d1);
-            Log.Logger.Information("at logging {@d1}", d1);
+            Log.Logger.Information("logging {@d1}", d1);
 
             return View();
         }
