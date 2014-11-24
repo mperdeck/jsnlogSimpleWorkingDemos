@@ -12,7 +12,7 @@
     <div>
         <h1>EmptyWebFormsApplication</h1>
     <script type="text/ecmascript">
-        JL("jsLogger").fatal("log message");
+        JL("jsLogger").fatal("client log message");
         alert('EmptyWebFormsApplication');
     </script>
         

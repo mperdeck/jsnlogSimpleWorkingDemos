@@ -1,5 +1,6 @@
 using System;
 using System.Web.Routing;
+using System.Web.Mvc;
 
 [assembly: WebActivatorEx.PostApplicationStartMethod(
     typeof(EmptyLog4Net.App_Start.JSNLogConfig), "PostStart")]
@@ -7,10 +8,16 @@ using System.Web.Routing;
 namespace EmptyLog4Net.App_Start {
     public static class JSNLogConfig {
         public static void PostStart() {
-            // Insert a route at the very start of the routing table (so it gets picked up before all other routes)
-            // that ignores the jsnlog.logger route. That way, it will get through to the handler defined
+            // Insert a route that ignores the jsnlog.logger route. That way, 
+			// requests for jsnlog.logger will get through to the handler defined
             // in web.config.
-            RouteTable.Routes.Insert(0, new Route("jsnlog.logger/{*pathInfo}", new StopRoutingHandler()));
+			//
+			// The route must take this particular form, including the constraint, 
+			// otherwise ActionLink will be confused by this route and generate the wrong URLs.
+			
+            var jsnlogRoute = new Route("{*jsnloglogger}", new StopRoutingHandler());
+            jsnlogRoute.Constraints = new RouteValueDictionary {{ "jsnloglogger", @"jsnlog\.logger(/.*)?" }};
+            RouteTable.Routes.Insert(0, jsnlogRoute);
         }
     }
 }

@@ -12,8 +12,8 @@
     <div>
         <h1>EmptyWebFormsWebsite</h1>
     <script type="text/ecmascript">
-        JL("jsLogger").fatal("log message");
-        alert('EmptyWebFormsWebsite');
+        JL("jsLogger").fatal("client log message");
+        alert('EmptyWebFormsWebsite - Log4Net');
     </script>
     
     </div>

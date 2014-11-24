@@ -13,7 +13,8 @@
 <body>
     <h1>EmptyElmah</h1>
     <script type="text/ecmascript">
-        JL("jsLogger").fatal("log message");
+        JL("jsLogger").fatal("log message on client");
+        JL("jsLogger").warn({ msg: 'json from client', x: 5, y: 88 });
         alert('elmah');
     </script>
         

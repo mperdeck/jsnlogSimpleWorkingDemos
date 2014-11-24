@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.IO;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -25,8 +26,10 @@ namespace EmptySerilog
 
             // -----------------
 
+            string logFilePath = Path.Combine(Path.GetTempPath(), "log.txt");
+
             var log = new LoggerConfiguration()
-                            .WriteTo.Sink(new FileSink(@"D:\Dev\JSNLog\jsnlog.emptytestsites\EmptyTestSites\EmptySerilog\Logs\log.txt", new RawFormatter(), null))
+                            .WriteTo.Sink(new FileSink(logFilePath, new RawFormatter(), null))
                             .CreateLogger();
 
             Log.Logger = log;

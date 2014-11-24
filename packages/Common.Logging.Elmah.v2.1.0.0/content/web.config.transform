@@ -1,0 +1,14 @@
+<configuration>
+  <configSections>
+    <sectionGroup name="common">
+      <section name="logging" type="Common.Logging.ConfigurationSectionHandler, Common.Logging"/>
+    </sectionGroup>
+  </configSections>
+  <common>
+    <logging>
+      <factoryAdapter type="Common.Logging.Elmah.v2.ElmahLoggerFactoryAdapter, Common.Logging.Elmah.v2">
+        <arg key="MinLevel" value="all"/>
+      </factoryAdapter>
+    </logging>
+  </common>
+</configuration>

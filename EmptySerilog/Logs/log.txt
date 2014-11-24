@@ -1,8 +1,0 @@
-﻿[6/07/2014 1:43:36 PM +10:00] Information: "Hello, Serilog2!"
-
-[6/07/2014 1:43:36 PM +10:00] Information: "{d1}"
-d1 = "{ x = 5, y = 88 }"
-
-[6/07/2014 1:43:36 PM +10:00] Information: "{@d1}"
-d1 = { x: 5, y: 88 }
-

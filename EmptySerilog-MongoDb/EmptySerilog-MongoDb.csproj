@@ -48,8 +48,9 @@
     <Reference Include="Common.Logging.Serilog.StructuredText">
       <HintPath>..\packages\Common.Logging.Serilog.StructuredText.1.0.1\lib\net45\Common.Logging.Serilog.StructuredText.dll</HintPath>
     </Reference>
-    <Reference Include="JSNLog">
-      <HintPath>..\packages\JSNLog.2.7.2.0\lib\net40\JSNLog.dll</HintPath>
+    <Reference Include="JSNLog, Version=2.7.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\JSNLog.2.7.6.0\lib\net40\JSNLog.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MongoDB.Bson">
@@ -177,6 +178,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jsnlog.js.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

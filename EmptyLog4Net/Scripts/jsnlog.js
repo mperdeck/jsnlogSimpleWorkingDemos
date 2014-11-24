@@ -1,17 +1,51 @@
+/// <reference path="jsnlog_interfaces.d.ts"/>
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-/// <reference path="jsnlog_interfaces.d.ts"/>
 function JL(loggerName) {
+    // If name is empty, return the root logger
     if (!loggerName) {
         return JL.__;
     }
 
+    // Implements Array.reduce. JSNLog supports IE8+ and reduce is not supported in that browser.
+    // Same interface as the standard reduce, except that
+    if (!Array.prototype.reduce) {
+        Array.prototype.reduce = function (callback, initialValue) {
+            var previousValue = initialValue;
+            for (var i = 0; i < this.length; i++) {
+                previousValue = callback(previousValue, this[i], i, this);
+            }
+
+            return previousValue;
+        };
+    }
+
     var accumulatedLoggerName = '';
     var logger = ('.' + loggerName).split('.').reduce(function (prev, curr, idx, arr) {
+        // if loggername is a.b.c, than currentLogger will be set to the loggers
+        // root   (prev: JL, curr: '')
+        // a      (prev: JL.__, curr: 'a')
+        // a.b    (prev: JL.__.__a, curr: 'b')
+        // a.b.c  (prev: JL.__.__a.__a.b, curr: 'c')
+        // Note that when a new logger name is encountered (such as 'a.b.c'),
+        // a new logger object is created and added as a property to the parent ('a.b').
+        // The root logger is added as a property of the JL object itself.
+        // It is essential that the name of the property containing the child logger
+        // contains the full 'path' name of the child logger ('a.b.c') instead of
+        // just the bit after the last period ('c').
+        // This is because the parent inherits properties from its ancestors.
+        // So if the root has a child logger 'c' (stored in a property 'c' of the root logger),
+        // then logger 'a.b' has that same property 'c' through inheritance.
+        // The names of the logger properties start with __, so the root logger
+        // (which has name ''), has a nice property name '__'.
+        // accumulatedLoggerName evaluates false ('' is falsy) in first iteration when prev is the root logger.
+        // accumulatedLoggerName will be the logger name corresponding with the logger in currentLogger.
+        // Keep in mind that the currentLogger may not be defined yet, so can't get the name from
+        // the currentLogger object itself.
         if (accumulatedLoggerName) {
             accumulatedLoggerName += '.' + curr;
         } else {
@@ -20,6 +54,8 @@ function JL(loggerName) {
 
         var currentLogger = prev['__' + accumulatedLoggerName];
 
+        // If the currentLogger (or the actual logger being sought) does not yet exist,
+        // create it now.
         if (currentLogger === undefined) {
             // Set the prototype of the Logger constructor function to the parent of the logger
             // to be created. This way, __proto of the new logger object will point at the parent.
@@ -42,8 +78,19 @@ function JL(loggerName) {
 var JL;
 (function (JL) {
     JL.enabled;
+    JL.maxMessages;
+    JL.defaultAjaxUrl;
     JL.clientIP;
-    JL.requestId;
+
+    // Initialise requestId to empty string. If you don't do this and the user
+    // does not set it via setOptions, then the JSNLog-RequestId header will
+    // have value "undefined", which doesn't look good in a log.
+    //
+    // Note that you always want to send a requestId as part of log requests,
+    // otherwise the server side component doesn't know this is a log request
+    // and may create a new request id for the log request, causing confusion
+    // in the log.
+    JL.requestId = '';
 
     /**
     Copies the value of a property from one object to the other.
@@ -78,8 +125,20 @@ var JL;
     Filters that determine whether a log can go ahead.
     */
     function allow(filters) {
+        // If enabled is not null or undefined, then if it is false, then return false
+        // Note that undefined==null (!)
         if (!(JL.enabled == null)) {
             if (!JL.enabled) {
+                return false;
+            }
+        }
+
+        // If maxMessages is not null or undefined, then if it is 0, then return false.
+        // Note that maxMessages contains number of messages that are still allowed to send.
+        // It is decremented each time messages are sent. It can be negative when batch size > 1.
+        // Note that undefined==null (!)
+        if (!(JL.maxMessages == null)) {
+            if (JL.maxMessages < 1) {
                 return false;
             }
         }
@@ -127,8 +186,80 @@ var JL;
         return true;
     }
 
+    // If logObject is a function, the function is evaluated (without parameters)
+    // and the result returned.
+    // Otherwise, logObject itself is returned.
+    function stringifyLogObjectFunction(logObject) {
+        if (typeof logObject == "function") {
+            if (logObject instanceof RegExp) {
+                return logObject.toString();
+            } else {
+                return logObject();
+            }
+        }
+
+        return logObject;
+    }
+
+    var StringifiedLogObject = (function () {
+        // * msg -
+        //      if the logObject is a scalar (after possible function evaluation), this is set to
+        //      string representing the scalar. Otherwise it is left undefined.
+        // * meta -
+        //      if the logObject is an object (after possible function evaluation), this is set to
+        //      that object. Otherwise it is left undefined.
+        // * finalString -
+        //      This is set to the string representation of logObject (after possible function evaluation),
+        //      regardless of whether it is an scalar or an object. An object is stringified to a JSON string.
+        //      Note that you can't call this field "final", because as some point this was a reserved
+        //      JavaScript keyword and using final trips up some minifiers.
+        function StringifiedLogObject(msg, meta, finalString) {
+            this.msg = msg;
+            this.meta = meta;
+            this.finalString = finalString;
+        }
+        return StringifiedLogObject;
+    })();
+
+    // Takes a logObject, which can be
+    // * a scalar
+    // * an object
+    // * a parameterless function, which returns the scalar or object to log.
+    // Returns a stringifiedLogObject
+    function stringifyLogObject(logObject) {
+        // Note that this works if logObject is null.
+        // typeof null is object.
+        // JSON.stringify(null) returns "null".
+        var actualLogObject = stringifyLogObjectFunction(logObject);
+        var finalString;
+
+        switch (typeof actualLogObject) {
+            case "string":
+                return new StringifiedLogObject(actualLogObject, null, actualLogObject);
+            case "number":
+                finalString = actualLogObject.toString();
+                return new StringifiedLogObject(finalString, null, finalString);
+            case "boolean":
+                finalString = actualLogObject.toString();
+                return new StringifiedLogObject(finalString, null, finalString);
+            case "undefined":
+                return new StringifiedLogObject("undefined");
+            case "object":
+                if ((actualLogObject instanceof RegExp) || (actualLogObject instanceof String) || (actualLogObject instanceof Number) || (actualLogObject instanceof Boolean)) {
+                    finalString = actualLogObject.toString();
+                    return new StringifiedLogObject(finalString, null, finalString);
+                } else {
+                    return new StringifiedLogObject(null, actualLogObject, JSON.stringify(actualLogObject));
+                }
+            default:
+                return new StringifiedLogObject("unknown", null, "unknown");
+        }
+    }
+
     function setOptions(options) {
         copyProperty("enabled", options, this);
+        copyProperty("maxMessages", options, this);
+        copyProperty("defaultAjaxUrl", options, this);
         copyProperty("clientIP", options, this);
         copyProperty("requestId", options, this);
         return this;
@@ -167,6 +298,49 @@ var JL;
         return 2147483647;
     }
     JL.getOffLevel = getOffLevel;
+
+    function levelToString(level) {
+        if (level <= 1000) {
+            return "trace";
+        }
+        if (level <= 2000) {
+            return "debug";
+        }
+        if (level <= 3000) {
+            return "info";
+        }
+        if (level <= 4000) {
+            return "warn";
+        }
+        if (level <= 5000) {
+            return "error";
+        }
+        return "fatal";
+    }
+
+    // ---------------------
+    var Exception = (function () {
+        // data replaces message. It takes not just strings, but also objects and functions, just like the log function.
+        // internally, the string representation is stored in the message property (inherited from Error)
+        //
+        // inner: inner exception. Can be null or undefined.
+        function Exception(data, inner) {
+            this.inner = inner;
+            this.name = "JL.Exception";
+            this.message = stringifyLogObject(data).finalString;
+        }
+        return Exception;
+    })();
+    JL.Exception = Exception;
+
+    // Derive Exception from Error (a Host object), so browsers
+    // are more likely to produce a stack trace for it in their console.
+    //
+    // Note that instanceof against an object created with this constructor
+    // will return true in these cases:
+    // <object> instanceof JL.Exception);
+    // <object> instanceof Error);
+    Exception.prototype = new Error();
 
     // ---------------------
     var LogItem = (function () {
@@ -233,8 +407,20 @@ var JL;
         If in response to this call one or more log items need to be processed
         (eg., sent to the server), this method calls this.sendLogItems
         with an array with all items to be processed.
+        
+        Note that the name and parameters of this function must match those of the log function of
+        a Winston transport object, so that users can use these transports as appenders.
+        That is why there are many parameters that are not actually used by this function.
+        
+        level - string with the level ("trace", "debug", etc.) Only used by Winston transports.
+        msg - human readable message. Undefined if the log item is an object. Only used by Winston transports.
+        meta - log object. Always defined, because at least it contains the logger name. Only used by Winston transports.
+        callback - function that is called when the log item has been logged. Only used by Winston transports.
+        levelNbr - level as a number. Not used by Winston transports.
+        message - log item. If the user logged an object, this is the JSON string.  Not used by Winston transports.
+        loggerName: name of the logger.  Not used by Winston transports.
         */
-        Appender.prototype.log = function (level, message, loggerName) {
+        Appender.prototype.log = function (level, msg, meta, callback, levelNbr, message, loggerName) {
             var logItem;
 
             if (!allow(this)) {
@@ -244,17 +430,19 @@ var JL;
                 return;
             }
 
-            if (level < this.storeInBufferLevel) {
+            if (levelNbr < this.storeInBufferLevel) {
                 // Ignore the log item completely
                 return;
             }
 
-            logItem = new LogItem(level, message, loggerName, (new Date()).getTime());
+            logItem = new LogItem(levelNbr, message, loggerName, (new Date).getTime());
 
-            if (level < this.level) {
+            if (levelNbr < this.level) {
+                // Store in the hold buffer. Do not send.
                 if (this.bufferSize > 0) {
                     this.buffer.push(logItem);
 
+                    // If we exceeded max buffer size, remove oldest item
                     if (this.buffer.length > this.bufferSize) {
                         this.buffer.shift();
                     }
@@ -263,10 +451,12 @@ var JL;
                 return;
             }
 
-            if (level < this.sendWithBufferLevel) {
+            if (levelNbr < this.sendWithBufferLevel) {
                 // Want to send the item, but not the contents of the buffer
                 this.batchBuffer.push(logItem);
             } else {
+                // Want to send both the item and the contents of the buffer.
+                // Send contents of buffer first, because logically they happened first.
                 if (this.buffer.length) {
                     this.batchBuffer = this.batchBuffer.concat(this.buffer);
                     this.buffer.length = 0;
@@ -286,6 +476,19 @@ var JL;
                 return;
             }
 
+            if (!(JL.maxMessages == null)) {
+                if (JL.maxMessages < 1) {
+                    return;
+                }
+            }
+
+            // If maxMessages is not null or undefined, then decrease it by the batch size.
+            // This can result in a negative maxMessages.
+            // Note that undefined==null (!)
+            if (!(JL.maxMessages == null)) {
+                JL.maxMessages -= this.batchBuffer.length;
+            }
+
             this.sendLogItems(this.batchBuffer);
             this.batchBuffer.length = 0;
         };
@@ -298,7 +501,6 @@ var JL;
         __extends(AjaxAppender, _super);
         function AjaxAppender(appenderName) {
             _super.call(this, appenderName, AjaxAppender.prototype.sendLogItemsAjax);
-            this.url = "jsnlog.logger";
         }
         AjaxAppender.prototype.setOptions = function (options) {
             copyProperty("url", options, this);
@@ -308,6 +510,23 @@ var JL;
 
         AjaxAppender.prototype.sendLogItemsAjax = function (logItems) {
             try  {
+                // Only determine the url right before you send a log request.
+                // Do not set the url when constructing the appender.
+                //
+                // This is because the server side component sets defaultAjaxUrl
+                // in a call to setOptions, AFTER the JL object and the default appender
+                // have been created.
+                var ajaxUrl = "/jsnlog.logger";
+
+                // This evaluates to true if defaultAjaxUrl is null or undefined
+                if (!(JL.defaultAjaxUrl == null)) {
+                    ajaxUrl = JL.defaultAjaxUrl;
+                }
+
+                if (this.url) {
+                    ajaxUrl = this.url;
+                }
+
                 var json = JSON.stringify({
                     r: JL.requestId,
                     lg: logItems
@@ -317,9 +536,10 @@ var JL;
                 // Note that there is no event handling here. If the send is not
                 // successful, nothing can be done about it.
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST', this.url);
+                xhr.open('POST', ajaxUrl);
 
                 xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.setRequestHeader('JSNLog-RequestId', JL.requestId);
                 xhr.send(json);
             } catch (e) {
             }
@@ -327,6 +547,91 @@ var JL;
         return AjaxAppender;
     })(Appender);
     JL.AjaxAppender = AjaxAppender;
+
+    // ---------------------
+    var ConsoleAppender = (function (_super) {
+        __extends(ConsoleAppender, _super);
+        function ConsoleAppender(appenderName) {
+            _super.call(this, appenderName, ConsoleAppender.prototype.sendLogItemsConsole);
+        }
+        ConsoleAppender.prototype.clog = function (logEntry) {
+            console.log(logEntry);
+        };
+
+        ConsoleAppender.prototype.cerror = function (logEntry) {
+            if (console.error) {
+                console.error(logEntry);
+            } else {
+                this.clog(logEntry);
+            }
+        };
+
+        ConsoleAppender.prototype.cwarn = function (logEntry) {
+            if (console.warn) {
+                console.warn(logEntry);
+            } else {
+                this.clog(logEntry);
+            }
+        };
+
+        ConsoleAppender.prototype.cinfo = function (logEntry) {
+            if (console.info) {
+                console.info(logEntry);
+            } else {
+                this.clog(logEntry);
+            }
+        };
+
+        // IE11 has a console.debug function. But its console doesn't have
+        // the option to show/hide debug messages (the same way Chrome and FF do),
+        // even though it does have such buttons for Error, Warn, Info.
+        //
+        // For now, this means that debug messages can not be hidden on IE.
+        // Live with this, seeing that it works fine on FF and Chrome, which
+        // will be much more popular with developers.
+        ConsoleAppender.prototype.cdebug = function (logEntry) {
+            if (console.debug) {
+                console.debug(logEntry);
+            } else {
+                this.cinfo(logEntry);
+            }
+        };
+
+        ConsoleAppender.prototype.sendLogItemsConsole = function (logItems) {
+            try  {
+                if (!console) {
+                    return;
+                }
+
+                var i;
+                for (i = 0; i < logItems.length; ++i) {
+                    var li = logItems[i];
+                    var msg = li.n + ": " + li.m;
+
+                    // Only log the timestamp if we're on the server
+                    // (window is undefined). On the browser, the user
+                    // sees the log entry probably immediately, so in that case
+                    // the timestamp is clutter.
+                    if (typeof window === 'undefined') {
+                        msg = new Date(li.t) + " | " + msg;
+                    }
+
+                    if (li.l <= JL.getDebugLevel()) {
+                        this.cdebug(msg);
+                    } else if (li.l <= JL.getInfoLevel()) {
+                        this.cinfo(msg);
+                    } else if (li.l <= JL.getWarnLevel()) {
+                        this.cwarn(msg);
+                    } else {
+                        this.cerror(msg);
+                    }
+                }
+            } catch (e) {
+            }
+        };
+        return ConsoleAppender;
+    })(Appender);
+    JL.ConsoleAppender = ConsoleAppender;
 
     // --------------------
     var Logger = (function () {
@@ -336,33 +641,6 @@ var JL;
             // of its parent via the prototype chain.
             this.seenRegexes = [];
         }
-        Logger.prototype.stringifyLogObject = function (logObject) {
-            switch (typeof logObject) {
-                case "string":
-                    return logObject;
-                case "number":
-                    return logObject.toString();
-                case "boolean":
-                    return logObject.toString();
-                case "undefined":
-                    return "undefined";
-                case "function":
-                    if (logObject instanceof RegExp) {
-                        return logObject.toString();
-                    } else {
-                        return this.stringifyLogObject(logObject());
-                    }
-                case "object":
-                    if ((logObject instanceof RegExp) || (logObject instanceof String) || (logObject instanceof Number) || (logObject instanceof Boolean)) {
-                        return logObject.toString();
-                    } else {
-                        return JSON.stringify(logObject);
-                    }
-                default:
-                    return "unknown";
-            }
-        };
-
         Logger.prototype.setOptions = function (options) {
             copyProperty("level", options, this);
             copyProperty("userAgentRegex", options, this);
@@ -377,22 +655,70 @@ var JL;
             return this;
         };
 
-        Logger.prototype.log = function (level, logObject) {
-            var i = 0;
-            var message;
+        // Turns an exception into an object that can be sent to the server.
+        Logger.prototype.buildExceptionObject = function (e) {
+            var excObject = {};
 
+            if (e.stack) {
+                excObject.stack = e.stack;
+            } else {
+                excObject.e = e;
+            }
+            if (e.message) {
+                excObject.message = e.message;
+            }
+            if (e.name) {
+                excObject.name = e.name;
+            }
+            if (e.data) {
+                excObject.data = e.data;
+            }
+            if (e.inner) {
+                excObject.inner = this.buildExceptionObject(e.inner);
+            }
+
+            return excObject;
+        };
+
+        // Logs a log item.
+        // Parameter e contains an exception (or null or undefined).
+        //
+        // Reason that processing exceptions is done at this low level is that
+        // 1) no need to spend the cpu cycles if the logger is switched off
+        // 2) fatalException takes both a logObject and an exception, and the logObject
+        //    may be a function that should only be executed if the logger is switched on.
+        //
+        // If an exception is passed in, the contents of logObject is attached to the exception
+        // object in a new property logData.
+        // The resulting exception object is than worked into a message to the server.
+        //
+        // If there is no exception, logObject itself is worked into the message to the server.
+        Logger.prototype.log = function (level, logObject, e) {
+            var i = 0;
+            var compositeMessage;
+            var excObject;
+
+            // If we can't find any appenders, do nothing
             if (!this.appenders) {
                 return this;
             }
 
             if (((level >= this.level)) && allow(this)) {
-                message = this.stringifyLogObject(logObject);
+                if (e) {
+                    excObject = this.buildExceptionObject(e);
+                    excObject.logData = stringifyLogObjectFunction(logObject);
+                } else {
+                    excObject = logObject;
+                }
 
-                if (allowMessage(this, message)) {
+                compositeMessage = stringifyLogObject(excObject);
+
+                if (allowMessage(this, compositeMessage.finalString)) {
+                    // See whether message is a duplicate
                     if (this.onceOnly) {
                         i = this.onceOnly.length - 1;
                         while (i >= 0) {
-                            if (new RegExp(this.onceOnly[i]).test(message)) {
+                            if (new RegExp(this.onceOnly[i]).test(compositeMessage.finalString)) {
                                 if (this.seenRegexes[i]) {
                                     return this;
                                 }
@@ -405,9 +731,19 @@ var JL;
                     }
 
                     // Pass message to all appenders
+                    // Note that these appenders could be Winston transports
+                    // https://github.com/flatiron/winston
+                    //
+                    // These transports do not take the logger name as a parameter.
+                    // So add it to the meta information, so even Winston transports will
+                    // store this info.
+                    compositeMessage.meta = compositeMessage.meta || {};
+                    compositeMessage.meta.loggerName = this.loggerName;
+
                     i = this.appenders.length - 1;
                     while (i >= 0) {
-                        this.appenders[i].log(level, message, this.loggerName);
+                        this.appenders[i].log(levelToString(level), compositeMessage.msg, compositeMessage.meta, function () {
+                        }, level, compositeMessage.finalString, this.loggerName);
                         i--;
                     }
                 }
@@ -434,12 +770,30 @@ var JL;
         Logger.prototype.fatal = function (logObject) {
             return this.log(getFatalLevel(), logObject);
         };
+        Logger.prototype.fatalException = function (logObject, e) {
+            return this.log(getFatalLevel(), logObject, e);
+        };
         return Logger;
     })();
     JL.Logger = Logger;
 
+    function createAjaxAppender(appenderName) {
+        return new AjaxAppender(appenderName);
+    }
+    JL.createAjaxAppender = createAjaxAppender;
+
+    function createConsoleAppender(appenderName) {
+        return new ConsoleAppender(appenderName);
+    }
+    JL.createConsoleAppender = createConsoleAppender;
+
     // -----------------------
+    // In the browser, the default appender is the AjaxAppender.
+    // Under nodejs (where there is no "window"), use the ConsoleAppender instead.
     var defaultAppender = new AjaxAppender("");
+    if (typeof window === 'undefined') {
+        defaultAppender = new ConsoleAppender("");
+    }
 
     // Create root logger
     //
@@ -453,9 +807,27 @@ var JL;
         level: JL.getDebugLevel(),
         appenders: [defaultAppender]
     });
-
-    function createAjaxAppender(appenderName) {
-        return new AjaxAppender(appenderName);
-    }
-    JL.createAjaxAppender = createAjaxAppender;
 })(JL || (JL = {}));
+
+// Support CommonJS module format
+var exports;
+if (typeof exports !== 'undefined') {
+    exports.JL = JL;
+}
+
+// Support AMD module format
+var define;
+if (typeof define == 'function' && define.amd) {
+    define('jsnlog', [], function () {
+        return JL;
+    });
+}
+
+// If the __jsnlog_configure global function has been
+// created, call it now. This allows you to create a global function
+// setting logger options etc. inline in the page before jsnlog.js
+// has been loaded.
+if (typeof __jsnlog_configure == 'function') {
+    __jsnlog_configure();
+}
+//# sourceMappingURL=jsnlog.js.map

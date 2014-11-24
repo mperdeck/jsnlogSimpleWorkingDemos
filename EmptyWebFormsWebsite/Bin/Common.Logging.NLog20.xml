@@ -697,6 +697,12 @@
         </member>
         <member name="M:Common.Logging.NLog.NLogLoggerFactoryAdapter.#ctor(System.Collections.Specialized.NameValueCollection)">
             <summary>
+            Constructor for binary backwards compatibility with non-portableversions
+            </summary>
+            <param name="properties">The properties.</param>
+        </member>
+        <member name="M:Common.Logging.NLog.NLogLoggerFactoryAdapter.#ctor(Common.Logging.Configuration.NameValueCollection)">
+            <summary>
             Constructor
             </summary>
             <param name="properties"></param>
@@ -707,29 +713,6 @@
             </summary>
             <param name="name"></param>
             <returns></returns>
-        </member>
-        <member name="T:AssemblyDoc">
-            <summary>
-            <para>This assembly contains the implementations to plug NLog 2.0 into Common.Logging.</para>
-            <para>For an example on how to configure
-            <list type="bullet">
-            <item>Common.Logging to render its output to Entlib, see <see cref="T:Common.Logging.NLog.NLogLoggerFactoryAdapter"/>.</item>
-            <item>NLog to render its output to Common.Logging use <see cref="T:Common.Logging.NLog.CommonLoggingTarget"/>.</item>
-            </list>
-            </para>
-            <para>Note, that you cannot use NLog in medium trust environments unless you use an unsigned build</para>
-            </summary>
-        </member>
-        <member name="T:Common.Logging.NLog.NamespaceDoc">
-            <summary>
-            <para>This namespace contains the implementations to plug NLog 2.0 into Common.Logging.</para>
-            <para>For an example on how to configure
-            <list type="bullet">
-            <item>Common.Logging to render its output to NLog, see <see cref="T:Common.Logging.NLog.NLogLoggerFactoryAdapter"/>.</item>
-            <item>NLog to render its output to Common.Logging use <see cref="T:Common.Logging.NLog.CommonLoggingTarget"/>.</item>
-            </list>
-            </para>
-            </summary>
         </member>
     </members>
 </doc>

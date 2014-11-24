@@ -16,10 +16,6 @@ namespace EmptySerilog.Controllers
         {
             Log.Logger.Information("Logging from controller");
 
-            //var d1 = new { x = 5, y = 88 };
-            //Log.Logger.Information("{d1}", d1);
-            //Log.Logger.Information("{@d1}", d1);
-
             return View();
         }
     }
