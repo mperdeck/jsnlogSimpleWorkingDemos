@@ -1,0 +1,23 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EmptyLog4Net</title>
+    @Html.Raw(JSNLog.JavascriptLogging.Configure())
+</head>
+<body>
+    <h1>EmptyLog4Net - RequestIds</h1>
+    <script type="text/ecmascript">
+      JL("jsLogger").fatal("client log message");
+        alert('log4net - requestids');
+    </script>
+        
+    <div>
+    </div>
+</body>
+</html>

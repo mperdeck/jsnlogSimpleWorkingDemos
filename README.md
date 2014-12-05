@@ -9,3 +9,8 @@ To reduce download times, this solution uses NuGet Package Restore. This means t
 
 This all happens automatically if you use NuGet version 2.7 or higher. However, if you use NuGet 2.0-2.6, you'll need to give consent. See http://docs.nuget.org/docs/reference/package-restore#Package_Restore_Consent
 
+Request Ids
+-----------
+This solution includes demo sites that use request ids (http://jsnlog.com/Documentation/GetStartedLogging/RequestIds). Look for projects ending in " - RequestIds".
+
+
