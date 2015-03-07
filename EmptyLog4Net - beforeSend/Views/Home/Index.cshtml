@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EmptyLog4Net - </title>
+    @Html.Raw(JSNLog.JavascriptLogging.Configure())
+</head>
+<body>
+    <h1>EmptyLog4Net - beforeSend</h1>
+    <script type="text/ecmascript">
+      JL("jsLogger").fatal("client log message");
+      alert('log4net - beforeSend');
+
+        // -----------------------
+        // beforeSend example
+
+      var addRequestHeaders = function (xhr) {
+          xhr.setRequestHeader('JSNLog-Custom-TestHeader', 'test value');
+      };
+
+      var appender = JL.createAjaxAppender("example appender");
+      appender.setOptions({
+          "beforeSend": addRequestHeaders
+      });
+
+      JL().setOptions({
+          "appenders": [appender]
+      });
+
+      JL("jsLogger").fatal("client log message with new request header");
+    </script>
+        
+    <div>
+    </div>
+</body>
+</html>

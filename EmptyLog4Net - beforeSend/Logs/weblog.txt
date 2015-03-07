@@ -1,0 +1,14 @@
+2015-03-06 23:47:33,008 | INFO | serverlogger | Info Message generated on server
+2015-03-06 23:49:22,955 | INFO | serverlogger | Info Message generated on server
+2015-03-06 23:49:29,530 | INFO | serverlogger | Info Message generated on server
+2015-03-06 23:50:27,772 | INFO | serverlogger | Info Message generated on server
+2015-03-06 23:52:54,776 | INFO | serverlogger | Info Message generated on server
+2015-03-06 23:53:59,251 | INFO | serverlogger | Info Message generated on server
+2015-03-06 23:54:22,595 | INFO | serverlogger | Info Message generated on server
+2015-03-06 23:55:43,642 | INFO | serverlogger | Info Message generated on server
+2015-03-06 23:55:44,176 | FATAL | jsLogger | client log message
+2015-03-06 23:55:56,744 | INFO | serverlogger | Info Message generated on server
+2015-03-06 23:55:56,784 | FATAL | jsLogger | client log message
+2015-03-07 00:08:10,385 | INFO | serverlogger | Info Message generated on server
+2015-03-07 00:08:10,656 | FATAL | jsLogger | client log message
+2015-03-07 00:08:12,405 | FATAL | jsLogger | client log message with new request header
