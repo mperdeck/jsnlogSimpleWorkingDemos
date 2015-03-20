@@ -1,14 +1,12 @@
-2015-03-06 23:47:33,008 | INFO | serverlogger | Info Message generated on server
-2015-03-06 23:49:22,955 | INFO | serverlogger | Info Message generated on server
-2015-03-06 23:49:29,530 | INFO | serverlogger | Info Message generated on server
-2015-03-06 23:50:27,772 | INFO | serverlogger | Info Message generated on server
-2015-03-06 23:52:54,776 | INFO | serverlogger | Info Message generated on server
-2015-03-06 23:53:59,251 | INFO | serverlogger | Info Message generated on server
-2015-03-06 23:54:22,595 | INFO | serverlogger | Info Message generated on server
-2015-03-06 23:55:43,642 | INFO | serverlogger | Info Message generated on server
-2015-03-06 23:55:44,176 | FATAL | jsLogger | client log message
-2015-03-06 23:55:56,744 | INFO | serverlogger | Info Message generated on server
-2015-03-06 23:55:56,784 | FATAL | jsLogger | client log message
-2015-03-07 00:08:10,385 | INFO | serverlogger | Info Message generated on server
-2015-03-07 00:08:10,656 | FATAL | jsLogger | client log message
-2015-03-07 00:08:12,405 | FATAL | jsLogger | client log message with new request header
+2015-03-20 23:42:25,556 | INFO | serverlogger | Info Message generated on server
+2015-03-20 23:42:26,057 | FATAL | jsLogger | client log message
+2015-03-20 23:42:28,305 | FATAL | jsLogger | client log message with new request header
+2015-03-20 23:42:40,513 | INFO | serverlogger | Info Message generated on server
+2015-03-20 23:42:40,529 | FATAL | jsLogger | client log message
+2015-03-20 23:42:42,339 | FATAL | jsLogger | client log message with new request header
+2015-03-20 23:42:47,342 | INFO | serverlogger | Info Message generated on server
+2015-03-20 23:42:47,364 | FATAL | jsLogger | client log message
+2015-03-20 23:42:48,764 | FATAL | jsLogger | client log message with new request header
+2015-03-20 23:43:29,130 | INFO | serverlogger | Info Message generated on server
+2015-03-20 23:43:29,159 | FATAL | jsLogger | client log message
+2015-03-20 23:43:30,333 | FATAL | jsLogger | client log message with new request header

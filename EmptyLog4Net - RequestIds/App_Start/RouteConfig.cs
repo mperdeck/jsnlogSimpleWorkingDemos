@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace EmptyLog4Net
+namespace EmptyLog4NetRequestIds
 {
     public class RouteConfig
     {

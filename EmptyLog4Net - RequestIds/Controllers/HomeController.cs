@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using log4net;
 
-namespace EmptyLog4Net.Controllers
+namespace EmptyLog4NetRequestIds.Controllers
 {
     public class HomeController : Controller
     {
