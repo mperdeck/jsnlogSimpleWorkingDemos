@@ -1,2 +1,0 @@
-2014-11-24 23:38:40.7390  26 Warn                           serverlogger                   Warn Message generated on server 
-2014-11-24 23:38:40.8390  34 Fatal                          jsLogger                       client log message 

@@ -1,2 +1,0 @@
-2014-11-24 12:37:03,982 | INFO | serverlogger | Info Message generated on server
-2014-11-24 12:37:04,005 | FATAL | jsLogger | client log message
