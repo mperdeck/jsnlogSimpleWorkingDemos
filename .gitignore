@@ -107,6 +107,8 @@ Backup*/
 UpgradeLog*.XML
 
 Logs/
-!EmptyWebFormsWebsite/Bin
-!EmptyWebFormsWebsite - Log4Net/Bin
+!EmptyWebFormsWebsite/Bin/
+!EmptyWebFormsWebsite - Log4Net/Bin/
+!EmptyWebFormsWebsite/Bin/*.dll
+!EmptyWebFormsWebsite - Log4Net/Bin/*.dll
 
