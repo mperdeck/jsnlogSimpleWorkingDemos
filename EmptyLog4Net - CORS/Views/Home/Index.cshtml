@@ -1,0 +1,23 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EmptyLog4Net - CORS</title>
+    @Html.Raw(JSNLog.JavascriptLogging.Configure())
+</head>
+<body>
+    <h1>EmptyLog4Net - CORS</h1>
+    <script type="text/ecmascript">
+      JL("jsLogger").fatal("client log message - CORS");
+        alert('log4net - CORS');
+    </script>
+        
+    <div>
+    </div>
+</body>
+</html>
