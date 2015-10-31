@@ -1,0 +1,24 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EmptyLog4Net - loggingEventHandlers</title>
+    @Html.Raw(JSNLog.JavascriptLogging.Configure())
+</head>
+<body>
+    <h1>EmptyLog4Net - loggingEventHandlers</h1>
+    <script type="text/ecmascript">
+        JL("jsLogger").fatal("first client log message");
+        JL("jsLogger").fatal("second client log message - this will be suppressed by logging event handler");
+        alert('log4net - loggingEventHandlers');
+    </script>
+        
+    <div>
+    </div>
+</body>
+</html>

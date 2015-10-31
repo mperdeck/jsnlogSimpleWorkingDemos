@@ -61,6 +61,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyLog4Net - beforeSend",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyLog4Net - CORS", "EmptyLog4Net - CORS\EmptyLog4Net - CORS.csproj", "{978AC663-1AEF-4477-801E-63D1BB36CF72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyLog4Net - loggingEventHandlers", "EmptyLog4Net - loggingEventHandlers\EmptyLog4Net - loggingEventHandlers.csproj", "{96893115-0311-46A2-95AF-A7B445EF064E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,10 @@ Global
 		{978AC663-1AEF-4477-801E-63D1BB36CF72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{978AC663-1AEF-4477-801E-63D1BB36CF72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{978AC663-1AEF-4477-801E-63D1BB36CF72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96893115-0311-46A2-95AF-A7B445EF064E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96893115-0311-46A2-95AF-A7B445EF064E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96893115-0311-46A2-95AF-A7B445EF064E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96893115-0311-46A2-95AF-A7B445EF064E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
