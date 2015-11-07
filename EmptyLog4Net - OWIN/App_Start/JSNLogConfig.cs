@@ -3,9 +3,9 @@ using System.Web.Routing;
 using System.Web.Mvc;
 
 [assembly: WebActivatorEx.PostApplicationStartMethod(
-    typeof(EmptyLog4NetLoggingEventHandlers.App_Start.JSNLogConfig), "PostStart")]
+    typeof(EmptyLog4Net___OWIN.App_Start.JSNLogConfig), "PostStart")]
 
-namespace EmptyLog4NetLoggingEventHandlers.App_Start {
+namespace EmptyLog4Net___OWIN.App_Start {
     public static class JSNLogConfig {
         public static void PostStart() {
             // Insert a route that ignores the jsnlog.logger route. That way,

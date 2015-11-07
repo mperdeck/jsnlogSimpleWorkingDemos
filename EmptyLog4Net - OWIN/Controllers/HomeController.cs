@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using log4net;
 
-namespace EmptyLog4NetOwin.Controllers
+namespace EmptyLog4Net___OWIN.Controllers
 {
     public class HomeController : Controller
     {

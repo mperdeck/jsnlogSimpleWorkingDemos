@@ -19,12 +19,5 @@ namespace EmptyLog4Net___OWIN
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
-
-        protected void Application_BeginRequest()
-        {
-            log4net.GlobalContext.Properties["requestId"] =
-                JSNLog.JavascriptLogging.RequestId();
-            log4net.Config.XmlConfigurator.Configure();
-        }
     }
 }
