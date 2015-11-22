@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -48,9 +48,9 @@
     <Reference Include="Common.Logging.Log4Net1211">
       <HintPath>..\packages\Common.Logging.Log4Net1211.3.0.0\lib\net40\Common.Logging.Log4Net1211.dll</HintPath>
     </Reference>
-    <Reference Include="JSNLog, Version=2.12.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="JSNLog, Version=2.13.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\JSNLog.2.12.1.0\lib\net40\JSNLog.dll</HintPath>
+      <HintPath>..\packages\JSNLog.2.13.0.0\lib\net40\JSNLog.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
@@ -177,7 +177,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>53204</DevelopmentServerPort>
+          <DevelopmentServerPort>21493</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:37070/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

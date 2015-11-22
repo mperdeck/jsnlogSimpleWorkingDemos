@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyLog4Net", "EmptyLog4Net\EmptyLog4Net.csproj", "{7A0CB990-2691-4B43-8AE6-DB5649E62FE8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyNLog", "EmptyNLog\EmptyNLog.csproj", "{CDCB7529-1F4A-45BF-B644-D6CDCAF95F64}"
@@ -11,7 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyWebFormsApplication", 
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EmptyWebFormsWebsite - Log4Net", "EmptyWebFormsWebsite - Log4Net\", "{51E04542-ED35-4046-99DE-BB30979F2C25}"
 	ProjectSection(WebsiteProperties) = preProject
-		Frontpage = "false"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		Debug.AspNetCompiler.VirtualPath = "/EmptyWebFormsWebsite - Log4Net"
 		Debug.AspNetCompiler.PhysicalPath = "EmptyWebFormsWebsite - Log4Net\"
@@ -32,7 +33,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EmptyWebFormsWebsite - Log4
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EmptyWebFormsWebsite", "EmptyWebFormsWebsite\", "{8D12B4C8-C605-4586-AA1E-C91B4F3E2384}"
 	ProjectSection(WebsiteProperties) = preProject
-		Frontpage = "false"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		Debug.AspNetCompiler.VirtualPath = "/EmptyWebFormsWebsite"
 		Debug.AspNetCompiler.PhysicalPath = "EmptyWebFormsWebsite\"
@@ -64,6 +64,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyLog4Net - loggingEventHandlers", "EmptyLog4Net - loggingEventHandlers\EmptyLog4Net - loggingEventHandlers.csproj", "{96893115-0311-46A2-95AF-A7B445EF064E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyLog4Net - OWIN", "EmptyLog4Net - OWIN\EmptyLog4Net - OWIN.csproj", "{1C769FF7-A8FC-465F-83DD-B9837716BBBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyLog4Net - ConfigurationInCode", "EmptyLog4Net - ConfigurationInCode\EmptyLog4Net - ConfigurationInCode.csproj", "{DAF716B1-5511-47C8-A36B-78B6364F7E87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +125,10 @@ Global
 		{1C769FF7-A8FC-465F-83DD-B9837716BBBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C769FF7-A8FC-465F-83DD-B9837716BBBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C769FF7-A8FC-465F-83DD-B9837716BBBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAF716B1-5511-47C8-A36B-78B6364F7E87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAF716B1-5511-47C8-A36B-78B6364F7E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAF716B1-5511-47C8-A36B-78B6364F7E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAF716B1-5511-47C8-A36B-78B6364F7E87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
