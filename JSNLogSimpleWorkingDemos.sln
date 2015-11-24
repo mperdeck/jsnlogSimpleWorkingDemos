@@ -29,6 +29,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EmptyWebFormsWebsite - Log4
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "59745"
+		SlnRelativePath = "EmptyWebFormsWebsite - Log4Net\"
 	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EmptyWebFormsWebsite", "EmptyWebFormsWebsite\", "{8D12B4C8-C605-4586-AA1E-C91B4F3E2384}"
@@ -49,6 +50,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EmptyWebFormsWebsite", "Emp
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "59752"
+		SlnRelativePath = "EmptyWebFormsWebsite\"
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptySerilog-MongoDb", "EmptySerilog-MongoDb\EmptySerilog-MongoDb.csproj", "{D84F7418-A06A-407E-802C-081E33E20E1C}"
