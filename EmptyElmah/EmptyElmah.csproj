@@ -64,6 +64,7 @@
     </Reference>
     <Reference Include="JSNLog">
       <HintPath>..\packages\JSNLog.2.8.0.0\lib\net40\JSNLog.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
