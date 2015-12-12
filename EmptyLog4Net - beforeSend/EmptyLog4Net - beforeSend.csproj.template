@@ -50,7 +50,7 @@
     </Reference>
     <Reference Include="JSNLog, Version=__Version__.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\JSNLog.__Version__.0\lib\net40\JSNLog.dll</HintPath>
+      <HintPath>..\packages\JSNLog.__Version__\lib\net40\JSNLog.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

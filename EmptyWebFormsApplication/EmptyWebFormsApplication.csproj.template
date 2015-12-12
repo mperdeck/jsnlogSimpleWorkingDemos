@@ -49,7 +49,7 @@
     </Reference>
     <Reference Include="JSNLog, Version=__Version__.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\JSNLog.__Version__.0\lib\net40\JSNLog.dll</HintPath>
+      <HintPath>..\packages\JSNLog.__Version__\lib\net40\JSNLog.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
