@@ -2,7 +2,7 @@
 <packages>
   <package id="Common.Logging" version="3.3.1" targetFramework="net45" />
   <package id="Common.Logging.Core" version="3.3.1" targetFramework="net45" />
-  <package id="Common.Logging.Serilog.StructuredText" version="1.0.2" targetFramework="net45" />
+  <package id="Common.Logging.Serilog.StructuredText" version="1.0.3" targetFramework="net45" />
   <package id="JSNLog" version="__Version__" targetFramework="net45" />
   <package id="JSNLog.Serilog" version="__Version__" targetFramework="net45" />
   <package id="Microsoft.AspNet.Mvc" version="5.2.3" targetFramework="net45" />

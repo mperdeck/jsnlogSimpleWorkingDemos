@@ -13,9 +13,13 @@
 <body>
     <h1>EmptySerilog</h1>
     <script type="text/ecmascript">
-        JL("jsLogger").fatal("client log message");
-        JL("jsLogger").warn({ msg: 'json from client', x: 5, y: 88 });
-        alert('serilog');
+    JL("jsLogger").trace("trace - client log message");
+    JL("jsLogger").debug("debug - client log message");
+    JL("jsLogger").info("info - client log message");
+    JL("jsLogger").warn({ msg: 'warn - json from client', x: 5, y: 88 });
+    JL("jsLogger").error("error - client log message");
+    JL("jsLogger").fatal("fatal - client log message");
+    alert('serilog');
     </script>
         
     <div>
