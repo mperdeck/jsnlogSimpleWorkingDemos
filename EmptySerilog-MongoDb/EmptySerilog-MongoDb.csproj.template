@@ -51,7 +51,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Common.Logging.Serilog.StructuredText">
-      <HintPath>..\packages\Common.Logging.Serilog.StructuredText.1.0.2\lib\net45\Common.Logging.Serilog.StructuredText.dll</HintPath>
+      <HintPath>..\packages\Common.Logging.Serilog.StructuredText.1.0.4\lib\net45\Common.Logging.Serilog.StructuredText.dll</HintPath>
     </Reference>
     <Reference Include="JSNLog, Version=__Version__.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\JSNLog.__Version__\lib\net40\JSNLog.dll</HintPath>
