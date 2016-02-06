@@ -13,60 +13,65 @@
 <body>
     <h1>EmptyLog4Net - beforeSend</h1>
     <script type="text/ecmascript">
-      JL("jsLogger").fatal("client log message without additional headers");
-      alert('log4net - beforeSend');
+    JL("jsLogger").fatal("client log message without additional headers");
+    alert('log4net - beforeSend');
 
-        // -----------------------
-        // beforeSend example
-        //
-        // Shows a number of things you can do by setting the beforeSend option
-        // to a function.
+      // -----------------------
+      // beforeSend example
+      //
+      // Shows a number of things you can do by setting the beforeSend option
+      // to a function.
 
-      var beforeSendExample = function (xhr) {
+    var beforeSendExample = function (xhr, json) {
 
-          // ------------------------------------------------------------------
-          // Add request header
+        // ------------------------------------------------------------------
+        // Modify the first message
 
-          xhr.setRequestHeader('JSNLog-Custom-TestHeader', 'test value');
+        json.lg[0].m += " - added by function beforeSendExample";
 
-          // ------------------------------------------------------------------
-          // Do something if the log message could not be sent to the server
+        // ------------------------------------------------------------------
+        // Add request header
 
-          // Replace send function with one that saves the message in the xhr, for
-          // use when response indicates failure.
-          xhr.originalSend = xhr.send;
-          xhr.send = function (msg) {
-              xhr.msg = msg; // Store message in xhr
-              xhr.originalSend(msg);
-          }
+        xhr.setRequestHeader('JSNLog-Custom-TestHeader', 'test value');
 
-          // Set response handler that checks if response received (readyState == 4)
-          // and response status is not 200 (OK). In that case, do something to deal with
-          // failure to log the message.
-          xhr.onreadystatechange = function () {
-              if (xhr.readyState != 4) { return; }
-              if (xhr.status == 200) { return; }
+        // ------------------------------------------------------------------
+        // Do something if the log message could not be sent to the server
 
-              console.log('Cannot log to server. Status: ' + xhr.status + '. Messsage: ' + xhr.msg);
-          };
+        // Replace send function with one that saves the message in the xhr, for
+        // use when response indicates failure.
+        xhr.originalSend = xhr.send;
+        xhr.send = function (msg) {
+            xhr.msg = msg; // Store message in xhr
+            xhr.originalSend(msg);
+        }
 
-          // Handle timeouts
-          xhr.timeout = 10000; // set timeout to 10 seconds
-          xhr.ontimeout = function () {
-              console.log('Cannot log to server. Timed out after ' + xhr.timeout + '. Messsage: ' + xhr.msg);
-          };
-      };
+        // Set response handler that checks if response received (readyState == 4)
+        // and response status is not 200 (OK). In that case, do something to deal with
+        // failure to log the message.
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState != 4) { return; }
+            if (xhr.status == 200) { return; }
 
-      var appender = JL.createAjaxAppender("example appender");
-      appender.setOptions({
-          "beforeSend": beforeSendExample
-      });
+            console.log('Cannot log to server. Status: ' + xhr.status + '. Messsage: ' + xhr.msg);
+        };
 
-      JL().setOptions({
-          "appenders": [appender]
-      });
+        // Handle timeouts
+        xhr.timeout = 10000; // set timeout to 10 seconds
+        xhr.ontimeout = function () {
+            console.log('Cannot log to server. Timed out after ' + xhr.timeout + '. Messsage: ' + xhr.msg);
+        };
+    };
 
-      JL("jsLogger").fatal("client log message with additional headers");
+    var appender = JL.createAjaxAppender("example appender");
+    appender.setOptions({
+        "beforeSend": beforeSendExample
+    });
+
+    JL().setOptions({
+        "appenders": [appender]
+    });
+
+    JL("jsLogger").fatal("client log message with additional headers");
     </script>
         
     <div>
