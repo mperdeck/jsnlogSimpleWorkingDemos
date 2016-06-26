@@ -236,9 +236,6 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\jsnlog.js" />
     <Content Include="Scripts\jsnlog.min.js" />
-    <Content Include="Scripts\knockout-3.4.0.debug.js" />
-    <Content Include="Scripts\knockout-3.4.0.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
