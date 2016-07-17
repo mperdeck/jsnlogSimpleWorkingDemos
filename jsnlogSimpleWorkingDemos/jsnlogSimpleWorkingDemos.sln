@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net", "JSNLogDemo_Log4Net\JSNLogDemo_Log4Net.csproj", "{BE76AA48-CD0F-4DA1-AA89-F1EB25812F9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Elmah", "JSNLogDemo_Elmah\JSNLogDemo_Elmah.csproj", "{EBA64FDC-4896-446E-A30D-A5C654B058BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Serilog", "JSNLogDemo_Serilog\JSNLogDemo_Serilog.csproj", "{337B67DA-E11A-4BB3-A70F-A550FFA36445}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_NLog", "JSNLogDemo_NLog\JSNLogDemo_NLog.csproj", "{78BEEFC5-65D8-4AA0-BE89-27D1CC58717D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net_beforeSend", "JSNLogDemo_Log4Net_beforeSend\JSNLogDemo_Log4Net_beforeSend.csproj", "{03B6C1B4-1142-43AE-8B7B-EAED98034233}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net_ConfigurationInCode", "JSNLogDemo_Log4Net_ConfigurationInCode\JSNLogDemo_Log4Net_ConfigurationInCode.csproj", "{994ADF7E-75E7-47A3-A6F8-4E3331BB1A8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net_CORS", "JSNLogDemo_Log4Net_CORS\JSNLogDemo_Log4Net_CORS.csproj", "{C4C25EBC-C239-4044-9130-E099658D9FCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net_LoggingEventHandlers", "JSNLogDemo_Log4Net_LoggingEventHandlers\JSNLogDemo_Log4Net_LoggingEventHandlers.csproj", "{B0966D8C-BE1F-4FC9-9B1A-4813187698C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net_OWIN", "JSNLogDemo_Log4Net_OWIN\JSNLogDemo_Log4Net_OWIN.csproj", "{1527AAD2-98C5-4946-8D43-D57DA8D43292}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net_RequestIds", "JSNLogDemo_Log4Net_RequestIds\JSNLogDemo_Log4Net_RequestIds.csproj", "{2A9E41D5-3D9D-4130-968B-409E8A1D91D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Serilog_MongoDB", "JSNLogDemo_Serilog_MongoDB\JSNLogDemo_Serilog_MongoDB.csproj", "{6FD5B9D5-92D6-4961-87B8-041C6F8AF31F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE76AA48-CD0F-4DA1-AA89-F1EB25812F9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE76AA48-CD0F-4DA1-AA89-F1EB25812F9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE76AA48-CD0F-4DA1-AA89-F1EB25812F9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE76AA48-CD0F-4DA1-AA89-F1EB25812F9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBA64FDC-4896-446E-A30D-A5C654B058BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBA64FDC-4896-446E-A30D-A5C654B058BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBA64FDC-4896-446E-A30D-A5C654B058BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBA64FDC-4896-446E-A30D-A5C654B058BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{337B67DA-E11A-4BB3-A70F-A550FFA36445}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{337B67DA-E11A-4BB3-A70F-A550FFA36445}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{337B67DA-E11A-4BB3-A70F-A550FFA36445}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{337B67DA-E11A-4BB3-A70F-A550FFA36445}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78BEEFC5-65D8-4AA0-BE89-27D1CC58717D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78BEEFC5-65D8-4AA0-BE89-27D1CC58717D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78BEEFC5-65D8-4AA0-BE89-27D1CC58717D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78BEEFC5-65D8-4AA0-BE89-27D1CC58717D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03B6C1B4-1142-43AE-8B7B-EAED98034233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03B6C1B4-1142-43AE-8B7B-EAED98034233}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03B6C1B4-1142-43AE-8B7B-EAED98034233}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03B6C1B4-1142-43AE-8B7B-EAED98034233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{994ADF7E-75E7-47A3-A6F8-4E3331BB1A8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{994ADF7E-75E7-47A3-A6F8-4E3331BB1A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{994ADF7E-75E7-47A3-A6F8-4E3331BB1A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{994ADF7E-75E7-47A3-A6F8-4E3331BB1A8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4C25EBC-C239-4044-9130-E099658D9FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4C25EBC-C239-4044-9130-E099658D9FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4C25EBC-C239-4044-9130-E099658D9FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4C25EBC-C239-4044-9130-E099658D9FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0966D8C-BE1F-4FC9-9B1A-4813187698C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0966D8C-BE1F-4FC9-9B1A-4813187698C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0966D8C-BE1F-4FC9-9B1A-4813187698C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0966D8C-BE1F-4FC9-9B1A-4813187698C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1527AAD2-98C5-4946-8D43-D57DA8D43292}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1527AAD2-98C5-4946-8D43-D57DA8D43292}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1527AAD2-98C5-4946-8D43-D57DA8D43292}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1527AAD2-98C5-4946-8D43-D57DA8D43292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A9E41D5-3D9D-4130-968B-409E8A1D91D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A9E41D5-3D9D-4130-968B-409E8A1D91D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A9E41D5-3D9D-4130-968B-409E8A1D91D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A9E41D5-3D9D-4130-968B-409E8A1D91D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FD5B9D5-92D6-4961-87B8-041C6F8AF31F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FD5B9D5-92D6-4961-87B8-041C6F8AF31F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FD5B9D5-92D6-4961-87B8-041C6F8AF31F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FD5B9D5-92D6-4961-87B8-041C6F8AF31F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
