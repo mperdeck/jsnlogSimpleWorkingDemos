@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net", "JSNLogDemo_Log4Net\JSNLogDemo_Log4Net.csproj", "{BE76AA48-CD0F-4DA1-AA89-F1EB25812F9A}"
 EndProject
@@ -24,6 +24,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net_RequestIds", "JSNLogDemo_Log4Net_RequestIds\JSNLogDemo_Log4Net_RequestIds.csproj", "{2A9E41D5-3D9D-4130-968B-409E8A1D91D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Serilog_MongoDB", "JSNLogDemo_Serilog_MongoDB\JSNLogDemo_Serilog_MongoDB.csproj", "{6FD5B9D5-92D6-4961-87B8-041C6F8AF31F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net_NoOnErrorHandler", "JSNLogDemo_Log4Net_NoOnErrorHandler\JSNLogDemo_Log4Net_NoOnErrorHandler.csproj", "{7F7F68A6-AB7A-4EBA-94C7-9CC5F38973D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net_CustomOnErrorHandler", "JSNLogDemo_Log4Net_CustomOnErrorHandler\JSNLogDemo_Log4Net_CustomOnErrorHandler.csproj", "{5043650F-6FE1-4E68-9C45-9BED09441F0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +79,14 @@ Global
 		{6FD5B9D5-92D6-4961-87B8-041C6F8AF31F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FD5B9D5-92D6-4961-87B8-041C6F8AF31F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FD5B9D5-92D6-4961-87B8-041C6F8AF31F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F7F68A6-AB7A-4EBA-94C7-9CC5F38973D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F7F68A6-AB7A-4EBA-94C7-9CC5F38973D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F7F68A6-AB7A-4EBA-94C7-9CC5F38973D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F7F68A6-AB7A-4EBA-94C7-9CC5F38973D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5043650F-6FE1-4E68-9C45-9BED09441F0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5043650F-6FE1-4E68-9C45-9BED09441F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5043650F-6FE1-4E68-9C45-9BED09441F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5043650F-6FE1-4E68-9C45-9BED09441F0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
