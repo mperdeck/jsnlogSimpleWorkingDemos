@@ -29,7 +29,7 @@ log4net.Config.XmlConfigurator.Configure();
 
             JavascriptLogging.SetJsnlogConfiguration(new JsnlogConfiguration
             {
-                serverSideMessageFormat = "%logger, %level, %message",
+                serverSideMessageFormat = "%userHostAddress, %logger, %level, %message",
                 productionLibraryPath = "~/Scripts/jsnlog.min.js",
                 loggers = new List<Logger>
                 {

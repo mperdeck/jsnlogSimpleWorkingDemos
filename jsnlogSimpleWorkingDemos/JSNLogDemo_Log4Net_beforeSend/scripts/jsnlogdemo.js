@@ -17,7 +17,7 @@
         // ------------------------------------------------------------------
         // Add request header
 
-        xhr.setRequestHeader('JSNLog-Custom-TestHeader', 'test value');
+        xhr.setRequestHeader('X-Forwarded-For', '99.88.77.66');
 
         // ------------------------------------------------------------------
         // Do something if the log message could not be sent to the server
