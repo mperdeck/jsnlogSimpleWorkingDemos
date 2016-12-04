@@ -1,0 +1,86 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>JSNLogDemo_Log4Net_Decycle</title>
+	
+    @Html.Raw(JSNLog.JavascriptLogging.Configure())
+	
+	<!-- cycle.js copied from https://github.com/douglascrockford/JSON-js/blob/master/cycle.js-->
+    <script src="~/scripts/cycle.js"></script>
+	
+    <script src="~/scripts/jsnlogdemo.js"></script>
+</head>
+<body>
+    <h1>JSNLogDemo_Log4Net_Decycle</h1>
+	
+	<p>
+	Log messages are sent to server the moment this page is opened.
+	</p>
+	<p>
+	The code generating the log messages is in scripts/jsnlogdemo.js.
+	</p>
+	<p>
+	JSNLog sets the <i>window.onerror</i> handler when it loads, so uncaught JavaScript exceptions are sent to your server side log.
+	However, it will only do that if <i>window.onerror</i> has not already been set 
+	(<a href="http://jsnlog.com/Documentation/HowTo/ExceptionLogging">details</a>). That way, if you are setting your own onerror handler, it won't override that.  
+	</p>
+	
+	
+
+<h2>Demo on using the serialize option to log objects with cyclic references</h2>
+
+<p>
+	This project shows how to log objects that have cyclic references. That is, they somehow refer to themselves.
+</p>
+
+<p>
+	It does this by:
+</p>
+
+<ul>
+	<li>
+		Importing file 
+		<a href="https://github.com/douglascrockford/JSON-js/blob/master/cycle.js" target="_blank">cycle.js</a>, 
+		which has a method <i>decycle</i> that replaces cyclic references with a meaningful string.
+	</li>
+	<li>
+		Using the 
+		<a href="http://jsnlog.com/Documentation/HowTo/CyclicObjects" target="_blank">serialize</a>
+		option to set a custom method to process objects into strings. That custom method uses the <i>decycle</i> method to deal with cyclic references.
+	</li>
+</ul>
+
+<p>
+	Do a View Source on this page to see this in action. The code that sets the <i>serialize</i> option is in file <i>jsnlogdemo.js</i>.
+</p>
+
+<script>
+	// Log simple cyclic object
+	var a = { x: 1 };
+	a.c = a;
+	JL().error(a);
+
+    // Log cyclic object where 2 objects make up the cycle
+	var a2 = { x: 1 };
+	var b2 = { y: 2 };
+	b2.d = { e: a2 };
+	a2.c = { b: b2 };
+	JL().error(a2);
+</script>
+
+	
+	        
+    <div>
+    </div>
+</body>
+</html>
+
+
+
+

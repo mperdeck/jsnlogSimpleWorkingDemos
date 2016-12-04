@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net_NoOnErro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net_CustomOnErrorHandler", "JSNLogDemo_Log4Net_CustomOnErrorHandler\JSNLogDemo_Log4Net_CustomOnErrorHandler.csproj", "{5043650F-6FE1-4E68-9C45-9BED09441F0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net_Decycle", "JSNLogDemo_Log4Net_Decycle\JSNLogDemo_Log4Net_Decycle.csproj", "{02830DB4-762F-4179-9B71-475179533259}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{5043650F-6FE1-4E68-9C45-9BED09441F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5043650F-6FE1-4E68-9C45-9BED09441F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5043650F-6FE1-4E68-9C45-9BED09441F0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02830DB4-762F-4179-9B71-475179533259}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02830DB4-762F-4179-9B71-475179533259}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02830DB4-762F-4179-9B71-475179533259}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02830DB4-762F-4179-9B71-475179533259}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
