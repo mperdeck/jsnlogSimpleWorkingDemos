@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net_CustomOn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net_Decycle", "JSNLogDemo_Log4Net_Decycle\JSNLogDemo_Log4Net_Decycle.csproj", "{02830DB4-762F-4179-9B71-475179533259}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSNLogDemo_Log4Net_UnhandledRejection", "JSNLogDemo_Log4Net_UnhandledRejection\JSNLogDemo_Log4Net_UnhandledRejection.csproj", "{83D9F942-2E51-4B6F-A3DC-E2D06B0D20E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{02830DB4-762F-4179-9B71-475179533259}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02830DB4-762F-4179-9B71-475179533259}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02830DB4-762F-4179-9B71-475179533259}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83D9F942-2E51-4B6F-A3DC-E2D06B0D20E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83D9F942-2E51-4B6F-A3DC-E2D06B0D20E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83D9F942-2E51-4B6F-A3DC-E2D06B0D20E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83D9F942-2E51-4B6F-A3DC-E2D06B0D20E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
