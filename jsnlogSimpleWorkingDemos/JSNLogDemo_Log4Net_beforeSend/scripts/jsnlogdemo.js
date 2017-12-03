@@ -22,23 +22,6 @@
         // ------------------------------------------------------------------
         // Do something if the log message could not be sent to the server
 
-        // Replace send function with one that saves the message in the xhr, for
-        // use when response indicates failure.
-        xhr.originalSend = xhr.send;
-        xhr.send = function (msg) {
-            xhr.msg = msg; // Store message in xhr
-            xhr.originalSend(msg);
-        }
-
-        // Set response handler that checks if response received (readyState == 4)
-        // and response status is not 200 (OK). In that case, do something to deal with
-        // failure to log the message.
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState != 4) { return; }
-            if (xhr.status == 200) { return; }
-
-            console.log('Cannot log to server. Status: ' + xhr.status + '. Messsage: ' + xhr.msg);
-        };
 
         // Handle timeouts
         xhr.timeout = 10000; // set timeout to 10 seconds
