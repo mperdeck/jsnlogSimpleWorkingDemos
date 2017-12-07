@@ -18,16 +18,6 @@
         // Add request header
 
         xhr.setRequestHeader('X-Forwarded-For', '99.88.77.66');
-
-        // ------------------------------------------------------------------
-        // Do something if the log message could not be sent to the server
-
-
-        // Handle timeouts
-        xhr.timeout = 10000; // set timeout to 10 seconds
-        xhr.ontimeout = function () {
-            console.log('Cannot log to server. Timed out after ' + xhr.timeout + '. Messsage: ' + xhr.msg);
-        };
     };
 
 	// Create new appender, so you can set its beforeSend option.
