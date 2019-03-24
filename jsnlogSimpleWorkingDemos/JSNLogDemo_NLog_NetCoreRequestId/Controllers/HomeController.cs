@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace JSNLogDemo_Core_NetCoreRequestId.Controllers
+namespace JSNLogDemo_NLog_NetCoreRequestId.Controllers
 {
     public class HomeController : Controller
     {

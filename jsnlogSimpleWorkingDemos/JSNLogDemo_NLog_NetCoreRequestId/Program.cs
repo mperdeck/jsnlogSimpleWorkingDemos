@@ -1,60 +1,62 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using NLog.Web;
 
-namespace JSNLogDemo_Core_NetCoreRequestId
+/// <summary>
+/// See
+/// https://github.com/NLog/NLog.Web/wiki/Getting-started-with-ASP.NET-Core-2
+/// </summary>
+
+namespace JSNLogDemo_NLog_NetCoreRequestId
 {
     public class Program
     {
         public static void Main(string[] args)
         {
             // NLog: setup the logger first to catch all errors
-            var currentDir = Directory.GetCurrentDirectory();
-            var logger = NLogBuilder
-                .ConfigureNLog($@"{currentDir}\{Startup.ConfigurationFolder}\NLog.Internal.config")
-                .GetCurrentClassLogger();
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 
             // Allows for <target name="file" xsi:type="File" fileName = "${var:logDirectory}logfile.log"... >
-            NLog.LogManager.Configuration.Variables["logDirectory"] = currentDir + "\\";
+            var currentDir = Directory.GetCurrentDirectory();
+            NLog.LogManager.Configuration.Variables["logDirectory"] = currentDir;
 
             try
             {
-                logger.Trace($"Configuration of {nameof(WebHost)} starting.");
-                CreateWebHostBuilder(args).Build().Run();
+                logger.Debug("init main");
+                BuildWebHost(args).Build().Run();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                logger.Fatal(e, $"Application stopped after Exception. {e.Message}");
+                //NLog: catch setup errors
+                logger.Error(ex, "Stopped program because of exception");
                 throw;
             }
             finally
             {
-                // Ensure to flush and stop internal timers/threads before application-exit
+                // Ensure to flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
                 NLog.LogManager.Shutdown();
             }
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        public static IWebHostBuilder BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
-                .ConfigureAppConfiguration((hostingContext, config) =>
-                {
-                    // set NLog config, so it can be used by .UseNLog()
-                    var env = hostingContext.HostingEnvironment;
-                    env.ConfigureNLog($@"{Startup.ConfigurationFolder}\NLog.Default.config");
-                })
-                .ConfigureLogging((hostingContext, logging) =>
+                .ConfigureLogging(logging =>
                 {
                     logging.ClearProviders();
-                    // Note: This logging configuration overrides any call to SetMinimumLevel!
-                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                    logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
                 })
-                .UseNLog(NLogAspNetCoreOptions.Default); // NLog: setup NLog for Dependency injection
+                .UseNLog();  // NLog: setup NLog for Dependency injection}
     }
 }
+
+
 
 
