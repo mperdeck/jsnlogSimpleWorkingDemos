@@ -22,6 +22,11 @@ namespace JSNLogDemo_Core_NetCoreApp2
         {
             // NLog: setup the logger first to catch all errors
             var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+
+            // Allows for <target name="file" xsi:type="File" fileName = "${var:logDirectory}logfile.log"... >
+            var currentDir = Directory.GetCurrentDirectory();
+            NLog.LogManager.Configuration.Variables["logDirectory"] = currentDir;
+
             try
             {
                 logger.Debug("init main");
