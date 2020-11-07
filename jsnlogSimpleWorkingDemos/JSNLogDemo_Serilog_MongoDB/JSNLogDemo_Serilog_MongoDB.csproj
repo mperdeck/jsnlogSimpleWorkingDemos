@@ -55,7 +55,7 @@
       <HintPath>..\packages\Common.Logging.Serilog.StructuredText.1.0.5\lib\net40\Common.Logging.Serilog.StructuredText.dll</HintPath>
     </Reference>
     <Reference Include="jsnlog, Version=1.0.0.0, Culture=neutral, PublicKeyToken=742e180f6c5ccd0d, processorArchitecture=MSIL">
-      <HintPath>..\packages\JSNLog.2.29.0\lib\net452\jsnlog.dll</HintPath>
+      <HintPath>..\packages\JSNLog.2.30.0\lib\net452\jsnlog.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
@@ -286,7 +286,7 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.2.8.0\lib\net46\Serilog.dll</HintPath>
+      <HintPath>..\packages\Serilog.2.10.0\lib\net46\Serilog.dll</HintPath>
     </Reference>
     <Reference Include="Serilog.Sinks.MongoDB, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.Sinks.MongoDB.4.0.0\lib\net45\Serilog.Sinks.MongoDB.dll</HintPath>
