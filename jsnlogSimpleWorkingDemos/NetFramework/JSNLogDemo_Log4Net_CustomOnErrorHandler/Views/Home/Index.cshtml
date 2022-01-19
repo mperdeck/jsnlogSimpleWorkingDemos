@@ -16,16 +16,35 @@
 <body>
     <h1>JSNLogDemo_Log4Net_CustomOnErrorHandler</h1>
 	
+	<h2>Welcome to this simple demo</h2>
 	<p>
-	Log messages are sent to server the moment this page is opened.
+	This page loads file <i>scripts/jsnlogdemo.js</i> (contained in this web project). 
+	It has a few lines of simple JavaScript code to send log messages to the server immediately when the file loads. Have a look.
 	</p>
 	<p>
-	The code generating the log messages is in scripts/jsnlogdemo.js.
+    To keep things simple, this project stores the log entries in a file in the Logs directory in the web project. 
+	This is very configurable. The installation page shows how to make JSNLog work with your server side logging package.
 	</p>
+	<p>
+    Open the log file in the Logs directory of this project. There you'll find the log entries sent in <i>scripts/jsnlogdemo.js</i>. 
+	</p>
+	<p>
+	To see the log messages going from your page to the web server, open the developer tools of your browser and use the Network tab.
+	</p>
+	
+	<h2>If you are running this on Chrome</h2>
+	<p>
+	The demo page loads jsnlog.min.js from a CDN. Chrome is known to block this request when the page is served from localhost. As a result, the log entries will not appear in the log file.
+	</p>
+	<p>
+	The solution is to either use another browser to load the demo page (such as Firefox). Or host it on say IIS.
+	</p>
+	
+	<h2>How it works</h2>
 	<p>
 	JSNLog sets the <i>window.onerror</i> handler when it loads, so uncaught JavaScript exceptions are sent to your server side log.
 	However, it will only do that if <i>window.onerror</i> has not already been set 
-	(<a href="http://jsnlog.com/Documentation/HowTo/ExceptionLogging">details</a>). That way, if you are setting your own onerror handler, it won't override that.  
+	(<a href="https://jsnlog.com/Documentation/HowTo/JavascriptErrorHandling">details</a>). That way, if you are setting your own onerror handler, it won't override that.  
 	</p>
 	
 	
