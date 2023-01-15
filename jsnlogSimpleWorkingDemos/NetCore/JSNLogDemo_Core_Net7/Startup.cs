@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
-using JSNLog;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using JSNLog;
 
-namespace JSNLogDemo_Core_Net4x
+namespace JSNLogDemo_Core_Net7
 {
     public class Startup
     {
@@ -24,11 +20,11 @@ namespace JSNLogDemo_Core_Net4x
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
 
 			// JSNLog simply passes incoming client side log messages to the standard Net Core logging infrastructure.
@@ -37,33 +33,36 @@ namespace JSNLogDemo_Core_Net4x
 			// By default, Net Core sends all log messages to the console. If you run this site by hitting F5 in Visual Studio, you will see
 			// those messages in the output window in Visual Studio. This will include the client side log messages sent by JSNLog.
 
-			
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
             }
-			
+
 
             // Configure JSNLog
 			// Do this before calling UseStaticFiles.
 			//
 			// For configuration options, see
 			// https://jsnlog.com/Documentation/Configuration
-            app.UseJSNLog(loggerFactory, new JsnlogConfiguration());
+            app.UseJSNLog(loggerFactory);
 
-			
+
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

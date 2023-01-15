@@ -27,11 +27,11 @@ namespace JSNLogDemo_Core_NetCoreApp3
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
 
-			// Configure the server side logging package Serilog to write to a file.
-            // JSNLog is not aware what server side logging package you use, so you can use any package you like or none at all.
+			// JSNLog simply passes incoming client side log messages to the standard Net Core logging infrastructure.
+            // As a result, those messages wind up in the same logs where your server side log messages are stored. 
 			//
-			// Note that the default level of .Net Core loggers is Information, so Trace and Debug messages are not logged.
-            loggerFactory.AddFile("Logs/log.txt");
+			// By default, Net Core sends all log messages to the console. If you run this site by hitting F5 in Visual Studio, you will see
+			// those messages in the output window in Visual Studio. This will include the client side log messages sent by JSNLog.
 
 
             if (env.IsDevelopment())
