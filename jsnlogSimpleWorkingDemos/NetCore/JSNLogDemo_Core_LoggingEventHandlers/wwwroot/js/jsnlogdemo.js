@@ -3,6 +3,8 @@
 window.addEventListener("load", function () {
 
 
+JL("jsLogger").fatal("fatal client log message - this will be suppressed by logging event handler");
+
 	
 	// Log with every severity
 	JL("jsLogger").debug("debug client log message");
@@ -23,6 +25,7 @@ window.addEventListener("load", function () {
 	// ReferenceError: xyz2 is not defined.
 	xyz2;
 });
+
 
 
 

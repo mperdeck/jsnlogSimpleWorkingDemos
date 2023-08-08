@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using JSNLog;
 
+
 namespace JSNLogDemo_Core_Net7
 {
     public class Startup
@@ -50,6 +51,8 @@ namespace JSNLogDemo_Core_Net7
 			// For configuration options, see
 			// https://jsnlog.com/Documentation/Configuration
             app.UseJSNLog(loggerFactory);
+
+
 
 
             app.UseStaticFiles();

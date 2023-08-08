@@ -1,7 +1,7 @@
 /* 
  * JSNLog 2.30.0
  * Open source under the MIT License.
- * Copyright 2012-2021 Mattijs Perdeck All rights reserved.
+ * Copyright 2012-2023 Mattijs Perdeck All rights reserved.
  */
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {

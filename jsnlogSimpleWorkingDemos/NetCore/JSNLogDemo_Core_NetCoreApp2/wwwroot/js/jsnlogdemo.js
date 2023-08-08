@@ -1,6 +1,8 @@
 
 // Run this code once the page is fully loaded (including all JavaScript files)
 window.addEventListener("load", function () {
+
+
 	
 	// Log with every severity
 	JL("jsLogger").debug("debug client log message");

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using JSNLog;
 
 
-namespace JSNLogDemo_NLog_NetCoreRequestId
+namespace JSNLogDemo_Core_DefaultAjaxUrl
 {
     public class Startup
     {
@@ -28,6 +28,12 @@ namespace JSNLogDemo_NLog_NetCoreRequestId
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
 
+			// JSNLog simply passes incoming client side log messages to the standard Net Core logging infrastructure.
+            // As a result, those messages wind up in the same logs where your server side log messages are stored. 
+			//
+			// By default, Net Core sends all log messages to the console. If you run this site by hitting F5 in Visual Studio, you will see
+			// those messages in the output window in Visual Studio. This will include the client side log messages sent by JSNLog.
+
 
             if (env.IsDevelopment())
             {
@@ -39,12 +45,24 @@ namespace JSNLogDemo_NLog_NetCoreRequestId
             }
 
 
+
             // Configure JSNLog
 			// Do this before calling UseStaticFiles.
 			//
+			// This configuration tells jsnlog.js to send log entries to /logging/mylogger.html
+			// It tells the server side library JSNLog to regard all requests to /logging/mylogger.html as log entries.
+			//
+			// Setting insertJsnlogInHtmlResponses to true ensures that the client side code for JSNLog will
+			// be inserted in the html responses to the browser, so you don't have to deal with this.
+			//
 			// For configuration options, see
 			// https://jsnlog.com/Documentation/Configuration
-            app.UseJSNLog(loggerFactory, new JsnlogConfiguration());
+            app.UseJSNLog(loggerFactory, new JsnlogConfiguration()
+            {
+                insertJsnlogInHtmlResponses = true,
+				productionLibraryPath = "https://cdnjs.cloudflare.com/ajax/libs/jsnlog/2.30.0/jsnlog.min.js",
+                defaultAjaxUrl = "/logging/mylogger.html"
+            }) ;
 
 
 
@@ -64,6 +82,7 @@ namespace JSNLogDemo_NLog_NetCoreRequestId
         }
     }
 }
+
 
 
 

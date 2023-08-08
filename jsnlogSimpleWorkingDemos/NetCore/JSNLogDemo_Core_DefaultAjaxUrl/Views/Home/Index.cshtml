@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div>
+    <h1>JSNLogDemo_Core_DefaultAjaxUrl</h1>
+	<h2>Welcome to this simple demo</h2>
+	<p>
+	This page loads file <i>js/jsnlogdemo.js</i> (contained in this web project). 
+	It has a few lines of simple JavaScript code to send log messages to the server immediately when the file loads. Have a look.
+	</p>
+	<p>
+    The recommended way to run this demo project is to:
+	<ol>
+	<li>Make this project the start up project - right click the project | Set as Startup Project.</li>
+	<li>Hit F5 to open the home page of the site in your browser.</li>
+	</ol>
+	</p>
+	<p>
+	This simple demo site uses the default Net Core logging infrastructure. As a result, all log messages will go to the console,
+    including client log messages.
+	</p>
+	<p>
+    You will see those messages in the Output window in Visual Studio.
+	</p>
+
+	<p>
+	To see the contents of the client side log messages as they travel from the browser to the server:
+	<ol>
+	<li>Right click anywhere in this page | Inspect</li>
+	<li>Click Network tab (right hand side)</li>
+	<li>Click Fetch/XHR tab</li>
+	<li>F5 to reload the page, so it sends the log messages again</li>
+	</ol>
+	</p>
+	
+	<h2>If you are running this on Chrome</h2>
+	<p>
+	The demo page loads jsnlog.min.js from a CDN. Chrome is known to block this request when the page is served from localhost. As a result, the log entries may not appear in the Output window.
+	</p>
+	<p>
+	The solution is to use another browser, such as Microsoft Edge.
+	</p>
+	
+	<h2>How it works</h2>
+	<p>
+	JSNLog sets the <i>window.onerror</i> handler when it loads, so uncaught JavaScript exceptions are sent to your server side log.
+	However, it will only do that if <i>window.onerror</i> has not already been set 
+	(<a href="https://jsnlog.com/Documentation/HowTo/JavascriptErrorHandling">details</a>). That way, if you are setting your own onerror handler, it won't override that.  
+	</p>
+    </div>
+
+    <script src="/js/jsnlogdemo.js"></script>
+	
+	
+</body>
+</html>
+
+
