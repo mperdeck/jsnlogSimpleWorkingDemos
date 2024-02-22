@@ -11,7 +11,7 @@
     MSBuild will show a warning that providing a version for Microsoft.AspNetCore.All is not recommended.
     But if you leave it out, the build fails.
     -->
-    <PackageReference Include="JSNLog" Version="3.0.2" />
+    <PackageReference Include="JSNLog" Version="3.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.*" />
   </ItemGroup>
 </Project>

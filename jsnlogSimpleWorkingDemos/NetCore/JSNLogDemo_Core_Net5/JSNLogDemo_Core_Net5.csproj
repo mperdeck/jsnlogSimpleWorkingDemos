@@ -8,7 +8,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JSNLog" Version="3.0.2" />
+    <PackageReference Include="JSNLog" Version="3.0.3" />
   </ItemGroup>
 
 </Project>

@@ -7,7 +7,7 @@
   <ItemGroup>
 
 	<!-- Microsoft.AspNetCore.All does not support net47, so include individual packages-->
-    <PackageReference Include="JSNLog" Version="3.0.2" />
+    <PackageReference Include="JSNLog" Version="3.0.3" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.*" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.*" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.*" />
